@@ -2,12 +2,26 @@
 #include "stateMachines.h"
 
 void
-__interrupt_vec(WDT_VECTOR) WDT() {/* 250 interrupts/sec */
-  static char blink_count = 0;
-  char beat = 68; // Represents the needed interrupts for an eighth note
-
-  if(++blink_count == beat) {
-    blink();
-    blink_count = 0;
+__interrupt_vec(WDT_VECTOR) WDT(){          /* 250 interrupts/sec */
+  static char count = 0;
+  switch(state2){
+  case 1:
+    if(++count == 125){
+      blink();
+      count = 0;
+    }
+    break;
+  case 2:
+    if(++count == 125){
+      redLed_toggle();
+      count = 0;
+    }
+    break;
+  case 3:
+    if(++count == 1){
+      redLed_toggle();
+      count = 0;
+    }
+    break;
   }
 }

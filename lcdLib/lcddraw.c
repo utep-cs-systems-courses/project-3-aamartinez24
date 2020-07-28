@@ -17,6 +17,71 @@ void drawPixel(u_char col, u_char row, u_int colorBGR)
   lcd_writeColor(colorBGR);
 }
 
+void dieBackground(u_int letterColor, u_int backColor)
+{
+  int j = 0;
+  while(j < screenHeight){
+    for(int i = 7; i < screenWidth;){
+      drawString8x12(i, j, "DIE", letterColor, backColor);
+      i = i + 30;
+    }
+    j = j + 12;
+  }
+}
+
+void illuminati(u_int triColor, u_int eyeColor)
+{
+  fillTriangle(10, 5*screenHeight/8, 110, triColor);
+  fillCircle(screenWidth/2, screenHeight/2, 20, COLOR_WHITE);
+  fillCircle(screenWidth/2, screenHeight/2, 15, eyeColor);
+}
+
+// draw a circle
+void fillCircle(u_char colCen, u_char rowCen, u_char radius, u_int colorBGR)
+{
+  int x = radius;
+  int y = 0;
+  int xChange = 1 - (radius << 1);
+  int yChange = 0;
+  int radiusError = 0;
+  
+  while (x >= y){
+    for (int i = colCen - x; i <= colCen + x; i++){
+      drawPixel(i, rowCen + y, colorBGR);
+      drawPixel(i, rowCen - y, colorBGR);
+    }
+    for (int i = colCen - y; i <= colCen + y; i++){
+      drawPixel(i, rowCen + x, colorBGR);
+      drawPixel(i, rowCen - x, colorBGR);
+    }
+    y++;
+    radiusError += yChange;
+    yChange += 2;
+    if (((radiusError << 1) + xChange) > 0){
+      x--;
+      radiusError += xChange;
+      xChange += 2;
+    }
+  }
+}
+
+/* Draws an equalateral triangle by drawing two right triangles */
+void fillTriangle(u_char colMin, u_char rowMin, u_char length, u_int colorBGR)
+{
+  /* left triangle */
+  for(int i = 0; i <= length/2; i++){
+    for(int j =0; j <= i; j++){
+      drawPixel(colMin+i, rowMin-j, colorBGR);
+    }
+  }
+  /* right triangle */
+  for(int i = 0; i <= length/2; i++){
+    for(int j = i; j <= length/2; j++){
+      drawPixel(colMin+i+(length/2), rowMin+j-(length/2), colorBGR);
+    }
+  }
+}
+
 /** Fill rectangle
  *
  *  \param colMin Column start
@@ -94,6 +159,39 @@ void drawString5x7(u_char col, u_char row, char *string,
   }
 }
 
+
+void drawChar8x12(u_char rcol, u_char rrow, char c,
+		  u_int fgColorBGR, u_int bgColorBGR)
+{
+  u_char col = 0;
+  u_char row = 0;
+  u_char bit = 0x80;
+  u_char oc = c - 0x20;
+
+  lcd_setArea(rcol, rrow, rcol + 7, rrow + 12);
+  while (row < 13) {
+    while (col < 8) {
+      u_int colorBGR = (font_8x12[oc][row] & bit) ? fgColorBGR : bgColorBGR;
+      lcd_writeColor(colorBGR);
+      col++;
+      bit >>= 1;
+    }
+    col = 0;
+    bit = 0x80;
+    row++;
+  }
+}
+
+void drawString8x12(u_char col, u_char row, char *string,
+		    u_int fgColorBGR, u_int bgColorBGR)
+{
+  u_char cols = col;
+  while (*string) {
+    drawChar8x12(cols, row, *string++, fgColorBGR, bgColorBGR);
+    cols += 9;
+  }
+}
+  
 
 /** Draw rectangle outline
  *  

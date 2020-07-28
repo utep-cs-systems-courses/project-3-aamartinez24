@@ -4,7 +4,7 @@
 
 /* effectively boolean */
 char SW1_state_down, SW2_state_down, SW3_state_down, SW4_state_down;
-char state;
+char state, state2;
 
 static char
 switch_update_interrupt_sense()

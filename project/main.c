@@ -3,15 +3,19 @@
 #include "libTimer.h"
 #include "switches.h"
 #include "buzzer.h"
+#include "led.h"
 #include "stateMachines.h"
-
-#define RED_LED BIT0
+#include "lcddraw.h"
 
 int redrawScreen = 1;
 
 int
 main()
 {
+
+  P1DIR |= LED_GREEN;
+  P1OUT |= LED_GREEN;
+  
   configureClocks();
   lcd_init();
   switch_init();
@@ -21,17 +25,16 @@ main()
   drawString8x12(40, 60, "HELLO" , COLOR_BLACK, COLOR_WHITE);
   drawString8x12(40, 80, "HUMAN", COLOR_BLACK, COLOR_WHITE);
 
-  //enableWDTInterrupts();
+  enableWDTInterrupts();
   or_sr(0x8);
-  /*
-  for(;;) {
+  
+  for(;;){
     while(!redrawScreen){
-      P!OUT &= ~RED_LED;
+      P1OUT &= ~LED_GREEN;
       or_sr(0x10);
     }
-    P1OUT |= RED_LED;
-    redrawScreen = 0;
-    state_advance();
+  P1OUT |= LED_GREEN;
+  __delay_cycles(300000);
+  redrawScreen = 0;
   }
-  */
 }

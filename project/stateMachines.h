@@ -3,7 +3,8 @@
 
 void state_advance();
 void blink();
+void redLed_toggle();
 
-extern char state;
+extern char state, state2;
 
 #endif

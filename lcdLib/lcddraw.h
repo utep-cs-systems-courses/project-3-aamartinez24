@@ -13,6 +13,15 @@
  */
 void drawPixel(u_char col, u_char row, u_int colorBGR);
 
+void dieBackground(u_int letterColor, u_int backColor);
+
+void illuminati(u_int triColor, u_int eyeColor);
+
+void fillCircle(u_char colCen, u_char rowCen, u_char radius, u_int colorBGR);
+
+/* Draws equalateral triangle */
+void fillTriangle(u_char colMin, u_char rowMin, u_char length, u_int colorBGR);
+
 /** Fill rectangle
  *
  *  \param colMin Column start
@@ -49,6 +58,18 @@ void drawString5x7(u_char col, u_char row, char *string,
  */
 void drawChar5x7(u_char col, u_char row, char c, 
 		 u_int fgColorBGR, u_int bgColorBGR);
+
+void drawString8x12(u_char col, u_char row, char *string,
+		    u_int fgColorBGR, u_int bgColorBGR);
+
+void drawChar8x12(u_char col, u_char row, char c,
+		  u_int fgColorBGR, u_int bgColorBGR);
+
+void drawString11x16(u_char col, u_char row, char *string,
+		     u_int fgColorBGR, u_int bgColorBGR);
+
+void drawChar11x16(u_char col, u_char row, char c,
+		   u_int fgColorBGR, u_int bgColorBGR);
 
 /** Draw rectangle outline
  *  

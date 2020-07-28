@@ -2,6 +2,7 @@
 #include "stateMachines.h"
 #include "switches.h"
 #include "buzzer.h"
+#include "led.h"
 #include "lcdutils.h"
 
 void song1(){
@@ -38,27 +39,60 @@ void blink(){
   }
 }
 
+void redLed_Off(){
+  red_on = 0;
+  leds_changed = 1;
+  led_update();
+}
+
+void redLed_On(){
+  red_on = 1;
+  leds_changed = 1;
+  led_update();
+}
+
+void redLed_toggle(){
+  static char lul = 0;
+  switch(lul){
+  case 0:
+    redLed_On();
+    lul = 1;
+    break;
+  case 1:
+    redLed_Off();
+    lul = 0;
+    break;
+  }
+}
+
 void state_advance(){
-  WDTCTL = WDTPW + WDTHOLD;
+  redLed_Off();
   switch(state){
   case 1:
+    redrawScreen = 1;
+    state2 = 1;
     clearScreen(COLOR_BLUE);
-    enableWDTInterrupts();
     break;
   case 2:
+    redrawScreen = 1;
     clearScreen(COLOR_BLACK);
     illuminati(COLOR_ROYAL_BLUE, COLOR_ROYAL_BLUE);
     song1();
+    state2 = 2;
     break;
   case 3:
+    redrawScreen = 1;
     clearScreen(COLOR_WHITE);
     illuminati(COLOR_BLACK, COLOR_BLACK);
     song2();
+    state2 = 3;
     break;
   case 4:
+    redrawScreen = 1;
     clearScreen(COLOR_RED);
     dieBackground(COLOR_BLACK, COLOR_RED);
     illuminati(COLOR_BLACK, COLOR_BLACK);
+    state2 = 0;
     break;
   }
 }
