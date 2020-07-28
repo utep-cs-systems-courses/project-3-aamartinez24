@@ -13,10 +13,13 @@
  */
 void drawPixel(u_char col, u_char row, u_int colorBGR);
 
+/* Designed background */
 void dieBackground(u_int letterColor, u_int backColor);
 
+/* combines the tirangle and circle to make a illuminati symbol */
 void illuminati(u_int triColor, u_int eyeColor);
 
+/* Draws a circle */
 void fillCircle(u_char colCen, u_char rowCen, u_char radius, u_int colorBGR);
 
 /* Draws equalateral triangle */

@@ -1,57 +1,41 @@
-# lcdLib from Project 3: LCD Game
+# Project 3 LCDTOY
 ## Introduction
 
-lcdLib provides primitives for a pixel, rectangle, clearing the screen and a 5x7 font. Handles all the lower-level "messy stuff". 
+Using the knowledge of the previous lab, this project uses the MSP430 and the
+LCD attachment to make a fun simple toy.
 
+## Run the program
 
-Two types are defined (used as shortcut to typing "unsigned [type]"):
+ First use:
+ "make" on the main directory to install all necessary files and libraries.
 
- - u_char : unsigned char
+ Next got to the project dircetory where all the LCD toy files are located.
 
- - u_int : unsigned int
+ Finally use:
+ "make load" to load and run the program in the MSP430 (should be connected}
 
-## Files
+ Extra:
+ Type "make clean" to clean are unnecessary files.
+ Type "mspdebug rf2500 "erase"" to erase any program currently installed in
+ the MSP430.
 
- - lcdutils.h, lcdutils.c: these provide the lowest level interface to
-   the lcd such as
+## Functionality
 
-    - lcd_init: initialization of the lcd
-    - defining screenWidth and screeenHeight
-    - colors (at end of lcdutils.h (represented as 16 bit BGR values: 5 bits of blue, 6 bits
-      of green, and 5 bits of red)
-    - lcd_setArea, lcd_writeColor: methods for selecting rectangular
-      regions and setting the colors of the pixels they contain.
-    
+   Before pressing the button you will be greeted with a black text reading
+   "Hello Human"
 
- - lcddraw.h: simple drawing facilities that utilize lcdutils
+   SW1:
+	pressing the first button will display a yellow illuminati triangle
+	with its eye blinking.
 
- - lcddraw.c: 
-     - drawPixel(): sets the color of a pixel
-     - fillRect(): fill a rectangle with a color
-     - drawChar5x7, drawString5x7: draws characters/strings at
-     particular locations
+   SW2:
+	Will display a black and blue illuminati symbol with the red led
+	turning on and off.
 
- - font5x7.c, font11x16.c font8x12.c: tables of bitmapped fonts
+   SW3:
+	Will display a black and white illuminati symbol with the red led
+	dimming.
 
-## Demo code
-
-lcddemo.c is a program that displays a string and a rectangle.  A
-"load" make production loads it into the launchpad board.
-
-## Suggested exercises
-
-In order to explore shape rendering, students are encouraged to create additinal "demo" programs that: 
-
- - draw a diagonal line (for example, where row = col or row = screenWidth-col)
-
- - draw a filled or outline of a right triangle
-
- - draw the other fonts hidden in the source files
-
-## Installing the LCD lib (for other programs)
-
-$ make install
-
-## See Also
-
-lcdLib requires timerLib (in directory ../timerLib).  Be sure to "make install" it first!
+   SW4:
+	Finally, the last button will display a black illuminait symbol with a
+	designed red background.

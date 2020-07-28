@@ -17,6 +17,7 @@ void drawPixel(u_char col, u_char row, u_int colorBGR)
   lcd_writeColor(colorBGR);
 }
 
+/* The word "die" is written in the background */
 void dieBackground(u_int letterColor, u_int backColor)
 {
   int j = 0;
@@ -29,6 +30,7 @@ void dieBackground(u_int letterColor, u_int backColor)
   }
 }
 
+/* Makes illuminati symbol with the tirangle and circle drawable */
 void illuminati(u_int triColor, u_int eyeColor)
 {
   fillTriangle(10, 5*screenHeight/8, 110, triColor);
@@ -36,7 +38,7 @@ void illuminati(u_int triColor, u_int eyeColor)
   fillCircle(screenWidth/2, screenHeight/2, 15, eyeColor);
 }
 
-// draw a circle
+/* draws a circle by specificng the center and radius */
 void fillCircle(u_char colCen, u_char rowCen, u_char radius, u_int colorBGR)
 {
   int x = radius;
