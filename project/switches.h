@@ -12,6 +12,5 @@ void switch_interrupt_handler();
 
 /* effectively boolean */
 extern char SW1_state_down, SW2_state_down, SW3_state_down, SW4_state_down;
-extern int redrawScreen;
 
 #endif // included

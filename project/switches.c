@@ -4,7 +4,8 @@
 
 /* effectively boolean */
 char SW1_state_down, SW2_state_down, SW3_state_down, SW4_state_down;
-char state, state2;
+char buttonState;
+int redrawScreen;
 
 static char
 switch_update_interrupt_sense()
@@ -24,7 +25,6 @@ switch_init()/* setup switch */
   P2OUT |= SWITCHES;/* pull-ups for switches */
   P2DIR &= ~SWITCHES;/* set switches' bits for input */
   switch_update_interrupt_sense();
-  switch_interrupt_handler();
 }
 
 void
@@ -38,19 +38,19 @@ switch_interrupt_handler()
   SW4_state_down = (p2val & SW4) ? 0 : 1;
 
   if(SW1_state_down){
-    state = 1;
+    buttonState = 1;
+    redrawScreen = 1;
   }
   else if(SW2_state_down){
-    state = 2;
+    buttonState = 2;
+    redrawScreen = 1;
   }
   else if(SW3_state_down){
-    state = 3;
+    buttonState = 3;
+    redrawScreen = 1;
   }
   else if(SW4_state_down){
-    state = 4;
-  }
-  if(state){
-    state_advance();
-    state = 0;
+    buttonState = 4;
+    redrawScreen = 1;
   }
 }

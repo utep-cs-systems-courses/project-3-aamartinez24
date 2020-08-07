@@ -11,13 +11,12 @@ p2_interrupt_handler.o: p2_interrupt_handler.c
 switches.o: switches.c switches.h
 buzzer.o: buzzer.c buzzer.h
 stateMachines.o: stateMachines.c stateMachines.h
-wdInterruptHandler.o: wdInterruptHandler.c
 led.o: led.c led.h
 
 all:lcdtoy.elf
 
 #additional rules for files
-lcdtoy.elf: ${COMMON_OBJECTS} main.o wdInterruptHandler.o p2_interrupt_handler.o switches.o buzzer.o stateMachines.o led.o
+lcdtoy.elf: ${COMMON_OBJECTS} main.o p2_interrupt_handler.o switches.o buzzer.o stateMachines.o led.o wdt_handler.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd -lShape -lCircle -lp2sw
 
 load: lcdtoy.elf
