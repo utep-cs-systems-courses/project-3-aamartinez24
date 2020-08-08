@@ -16,7 +16,7 @@ led.o: led.c led.h
 all:lcdtoy.elf
 
 #additional rules for files
-lcdtoy.elf: ${COMMON_OBJECTS} main.o p2_interrupt_handler.o switches.o buzzer.o stateMachines.o led.o wdt_handler.o
+lcdtoy.elf: ${COMMON_OBJECTS} main.o p2_interrupt_handler.o switches.o buzzer.o stateMachines.o led.o wdt_handler.o assemMethods.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd -lShape -lCircle -lp2sw
 
 load: lcdtoy.elf

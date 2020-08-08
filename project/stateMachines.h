@@ -3,7 +3,9 @@
 
 void state_advance();
 void blink();
-void redLed_toggle();
+void redLed_On();
+void redLed_Off();
+//void redLed_toggle();
 
 extern char buttonState, handleState;
 

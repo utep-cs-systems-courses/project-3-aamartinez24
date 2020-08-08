@@ -41,7 +41,7 @@ void redLed_On(){
   leds_changed = 1;
   led_update();
 }
-
+/*
 // turns red led on and off
 void redLed_toggle(){
   static char redState = 0;
@@ -56,6 +56,7 @@ void redLed_toggle(){
     break;
   }
 }
+*/
 
 // Main state function
 void state_advance(){

@@ -6,6 +6,7 @@
 #include "led.h"
 #include "stateMachines.h"
 #include "lcddraw.h"
+#include "assemMethods.h"
 
 int redrawScreen = 1;
 
